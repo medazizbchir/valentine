@@ -14,7 +14,15 @@
     }
     h1 { margin: 0 0 18px; font-size: 28px; }
     .btns { display:flex; align-items:center; gap:12px; margin-top: 18px; }
-    button { flex:1; padding: 14px 16px; border-radius: 14px; border:0; cursor:pointer; font-size: 16px; }
+    button {
+  width: 140px;        /* largeur fixe */
+  flex: 0 0 auto;      /* empêche l’extension */
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
     .yes { background:#ff4d88; color:white; }
     .no  { background:#f2f2f2; color:#222; }
     .between { font-size: 14px; color:#555; padding: 0 2px; white-space: nowrap; }
@@ -79,3 +87,4 @@
   </script>
 </body>
 </html>
+
