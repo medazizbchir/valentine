@@ -1,37 +1,81 @@
-<script>
-  const msgBox = document.getElementById("msgBox");
-  const btnYes = document.getElementById("btnYes");
-  const btnNo  = document.getElementById("btnNo");
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine 💌</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#fff7fb; margin:0; }
+    .card {
+      max-width: 520px; margin: 10vh auto; background: white; padding: 28px;
+      border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      position: relative; /* IMPORTANT pour le déplacement du bouton Lay */
+      overflow: hidden;   /* évite que le bouton sorte de la carte */
+    }
+    h1 { margin: 0 0 18px; font-size: 28px; }
+    .btns { display:flex; align-items:center; gap:12px; margin-top: 18px; }
+    button { flex:1; padding: 14px 16px; border-radius: 14px; border:0; cursor:pointer; font-size: 16px; }
+    .yes { background:#ff4d88; color:white; }
+    .no  { background:#f2f2f2; color:#222; }
+    .between { font-size: 14px; color:#555; padding: 0 2px; white-space: nowrap; }
+    .msg { margin-top: 18px; padding: 14px; border-radius: 14px; background:#f7f7f7; display:none; }
+  </style>
+</head>
 
-  function showMsg(text) {
-    msgBox.textContent = text;
-    msgBox.style.display = "block";
-  }
+<body>
+  <div class="card" id="card">
+    <h1>Would you be my valentine? 💘</h1>
 
-  // Eyy → message gentil
-  btnYes.addEventListener("click", () => {
-    showMsg("Bravo 😍💐 (ken 7ablek rabbi)");
-  });
+    <div class="btns" id="btnRow">
+      <button class="yes" id="btnYes">Eyy</button>
+      <span class="between">walla</span>
+      <button class="no" id="btnNo">Lay</button>
+    </div>
 
-  // Lay → message
-  btnNo.addEventListener("click", () => {
-    showMsg("lo22a 8alta lijeba 😄");
-  });
+    <div class="msg" id="msgBox"></div>
+  </div>
 
-  // Effet troll : le bouton Lay fuit la souris
-  btnNo.addEventListener("mouseenter", () => {
-    const card = document.querySelector(".card");
-    const cardRect = card.getBoundingClientRect();
-    const btnRect = btnNo.getBoundingClientRect();
+  <script>
+    const card = document.getElementById("card");
+    const msgBox = document.getElementById("msgBox");
+    const btnYes = document.getElementById("btnYes");
+    const btnNo  = document.getElementById("btnNo");
 
-    const maxX = cardRect.width - btnRect.width - 20;
-    const maxY = cardRect.height - btnRect.height - 20;
+    function showMsg(text) {
+      msgBox.textContent = text;
+      msgBox.style.display = "block";
+    }
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    btnYes.addEventListener("click", () => {
+      showMsg("Bravo 😍💐 (ken 7ablek rabbi)");
+    });
 
-    btnNo.style.position = "absolute";
-    btnNo.style.left = `${x}px`;
-    btnNo.style.top  = `${y}px`;
-  });
-</script>
+    btnNo.addEventListener("click", () => {
+      showMsg("lo22a 8alta lijeba 😄");
+    });
+
+    // Bouton Lay qui fuit (reste cliquable)
+    btnNo.addEventListener("mouseenter", () => {
+      const cardRect = card.getBoundingClientRect();
+      const btnRect  = btnNo.getBoundingClientRect();
+
+      // marges pour éviter les bords
+      const pad = 12;
+
+      // limites dans la carte
+      const maxX = cardRect.width  - btnRect.width  - pad * 2;
+      const maxY = cardRect.height - btnRect.height - pad * 2;
+
+      // si la carte est trop petite, ne bouge pas
+      if (maxX <= 0 || maxY <= 0) return;
+
+      const x = pad + Math.random() * maxX;
+      const y = pad + Math.random() * maxY;
+
+      btnNo.style.position = "absolute";
+      btnNo.style.left = `${x}px`;
+      btnNo.style.top  = `${y}px`;
+    });
+  </script>
+</body>
+</html>
