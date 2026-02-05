@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine 💌</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#fff7fb; margin:0; }
+    .card { max-width: 520px; margin: 10vh auto; background: white; padding: 28px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    h1 { margin: 0 0 12px; font-size: 28px; }
+    p { margin: 0 0 18px; font-size: 16px; line-height: 1.5; }
+    .btns { display:flex; gap:12px; margin-top: 18px; }
+    button { flex:1; padding: 14px 16px; border-radius: 14px; border:0; cursor:pointer; font-size: 16px; }
+    .yes { background:#ff4d88; color:white; }
+    .no { background:#f2f2f2; color:#222; }
+    .msg { margin-top: 18px; padding: 14px; border-radius: 14px; background:#f7f7f7; display:none; }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Would you be my valentine? 💘</h1>
+    <p id="subtitle">J’ai une question importante 😄</p>
+
+    <div class="btns">
+      <button class="yes" id="btnYes">Ey</button>
+      <button class="no" id="btnNo">Lay</button>
+    </div>
+
+    <div class="msg" id="msgBox"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const name = params.get("name");
+    if (name) document.getElementById("subtitle").textContent = `${name}, j’ai une question importante 😄`;
+
+    const msgBox = document.getElementById("msgBox");
+    function showMsg(text) {
+      msgBox.textContent = text;
+      msgBox.style.display = "block";
+    }
+
+    document.getElementById("btnYes").addEventListener("click", () => {
+      showMsg("Bravo 😍💐 (je t’emmène quelque part bientôt)");
+    });
+
+    document.getElementById("btnNo").addEventListener("click", () => {
+      showMsg("lo22a 8alta lijeba 😄");
+    });
+  </script>
+</body>
+</html>
